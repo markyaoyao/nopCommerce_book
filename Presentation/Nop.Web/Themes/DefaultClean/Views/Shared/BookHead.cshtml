@@ -1,0 +1,37 @@
+﻿@using Nop.Core
+@using Nop.Services.Helpers
+@using Nop.Web.Framework.UI
+@inject IWorkContext workContext
+@inject IThemeContext themeContext
+@inject IUserAgentHelper userAgentHelper
+@{
+    var supportRtl = workContext.WorkingLanguage.Rtl;
+    var themeName = themeContext.WorkingThemeName;
+
+    ////add main CSS file
+    //if (supportRtl)
+    //{
+    //    Html.AppendCssFileParts($"~/Themes/{themeName}/Content/css/styles.rtl.css");
+    //}
+    //else
+    //{
+    //    Html.AppendCssFileParts($"~/Themes/{themeName}/Content/css/styles.css");
+    //}
+    ////add jQuery UI css file
+    //Html.AppendCssFileParts("~/lib/jquery-ui/jquery-ui-1.12.1.custom/jquery-ui.min.css");
+
+    Html.AppendCssFileParts("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap");
+
+    Html.AppendCssFileParts("~/assets/css/responsive.css");
+    Html.AppendCssFileParts("~/assets/css/style.css");
+    Html.AppendCssFileParts("~/assets/css/remixicon/remixicon.css");
+    Html.AppendCssFileParts("~/assets/css/fontawesome.min.css");
+    Html.AppendCssFileParts("~/assets/css/slick-slide.min.css");
+    Html.AppendCssFileParts("~/assets/css/owl.min.css");
+    Html.AppendCssFileParts("~/assets/css/nice-select.min.css");
+    Html.AppendCssFileParts("~/assets/css/jquery-ui.min.css");
+    Html.AppendCssFileParts("~/assets/css/magnific.min.css");
+    Html.AppendCssFileParts("~/assets/css/bootstrap.min.css");
+    Html.AppendCssFileParts("~/assets/css/animate.min.css");
+
+}

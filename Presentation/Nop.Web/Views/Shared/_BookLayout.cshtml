@@ -1,0 +1,14 @@
+﻿@{
+    Layout = "_BookRoot";
+}
+@if (IsSectionDefined("Breadcrumb"))
+{
+    @section Breadcrumb {
+        @RenderSection("Breadcrumb")
+    }
+}
+<div>
+    @await Component.InvokeAsync("Widget", new { widgetZone = PublicWidgetZones.MainColumnBefore })
+    @RenderBody()
+    @await Component.InvokeAsync("Widget", new { widgetZone = PublicWidgetZones.MainColumnAfter })
+</div>

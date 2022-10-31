@@ -1,0 +1,33 @@
+﻿@model IList<ProductOverviewModel>
+
+
+@if (Model.Count > 0)
+{
+    <h5 class="section-title">主打商品</h5>
+    <div class="home-product-slider owl-carousel">
+        @foreach (var item in Model)
+        {
+            <div class="item">
+                <div class="single-product-wrap">
+                    <div class="thumb">
+                        <span class="tag">15% Off</span>
+                        <a href="@Url.RouteUrl("Product", new {SeName = item.SeName})">
+                            <img src="@item.DefaultPictureModel.ImageUrl" alt="@item.DefaultPictureModel.Title" style="height:150px;">
+                        </a>
+                        <a class="fav-btn" href="#"><i class="fa fa-heart"></i></a>
+                    </div>
+                    <div class="details">
+                        @*<h6><a href="single-restuarent.html">Pizza Hut</a> <span>Open</span></h6>*@
+                        <h6><a href="@Url.RouteUrl("Product", new {SeName = item.SeName})">@item.Name</a></h6>
+                        <div class="ratting">
+                            <i class="ri-star-fill ps-0"></i>4.9
+                            <span>(6k)</span>
+                            <span>@item.ProductPrice.Price</span>
+                        </div>
+                        <span>20-25 Min <span class="ms-3">Free Delivery</span></span>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+}

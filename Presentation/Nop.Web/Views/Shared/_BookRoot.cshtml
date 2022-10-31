@@ -1,0 +1,45 @@
+﻿@{
+    Layout = "_BookRoot.Head";
+}
+@await Component.InvokeAsync("Widget", new { widgetZone = PublicWidgetZones.BodyStartHtmlTagAfter })
+@await Html.PartialAsync("_Notifications")
+@await Html.PartialAsync("_JavaScriptDisabledWarning")
+@await Html.PartialAsync("_OldInternetExplorerWarning")
+
+
+<!-- preloader area start -->
+<div class="preloader" id="preloader">
+    <div class="preloader-inner">
+        <div id="wave1">
+        </div>
+        <div class="spinner">
+            <div class="dot1"></div>
+            <div class="dot2"></div>
+        </div>
+    </div>
+</div>
+<!-- preloader area end -->
+<!-- search popup area start -->
+<div class="body-overlay" id="body-overlay"></div>
+<div class="td-search-popup" id="td-search-popup">
+    <form action="index.html" class="search-form">
+        <div class="form-group">
+            <input type="text" class="form-control" placeholder="Search.....">
+        </div>
+        <button type="submit" class="submit-btn"><i class="fa fa-search"></i></button>
+    </form>
+</div>
+<!-- //. search Popup -->
+
+@await Html.PartialAsync("_BookHeader")
+
+<div class="container">
+    <div class="main-home-area pt-0">
+        @RenderBody()
+        @await Component.InvokeAsync("FixFooterMenu")
+    </div>
+</div>
+
+
+@await Component.InvokeAsync("EuCookieLaw")
+@await Component.InvokeAsync("Widget", new { widgetZone = PublicWidgetZones.BodyEndHtmlTagBefore })

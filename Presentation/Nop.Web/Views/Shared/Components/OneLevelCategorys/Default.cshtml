@@ -1,0 +1,145 @@
+﻿@model IList<CategorySimpleModel>
+
+@if (Model.Count > 0)
+{
+
+    <h5 class="section-title">所有館別</h5>
+
+    @foreach (var item in Model)
+    {
+        <div class="single-product-wrap">
+            <div class="thumb">
+                <span class="tag">15% Off</span>
+                <a href="@Url.RouteUrl("Category", new { SeName = item.SeName })" title="@item.PictureModel.Title">
+                    <img alt="@item.PictureModel.AlternateText" src="@item.PictureModel.ImageUrl" title="@item.PictureModel.Title">
+                </a>
+                <a class="fav-btn" href="#"><i class="fa fa-heart"></i></a>
+            </div>
+            <div class="details">
+                <h6><a href="single-restuarent.html">@item.Name</a></h6>
+                <div class="ratting">
+                    <i class="ri-star-fill ps-0"></i>4.9
+                    <span>(6k)</span>
+                    <span>Birch Street El Paso</span>
+                </div>
+                <span>20-25 Min <span class="ms-3">Free Delivery</span></span>
+            </div>
+        </div>
+    }
+    
+
+    @*<div class="category-grid home-page-category-grid">
+            <div class="item-grid">
+                @foreach (var item in Model)
+                {
+                    <div class="item-box">
+                        <div class="category-item">
+                            <h2 class="title">
+                                <a href="@Url.RouteUrl("Category", new { SeName = item.SeName })" title="@item.PictureModel.Title">
+                                    @item.Name
+                                </a>
+                            </h2>
+                            <div class="picture">
+                                <a href="@Url.RouteUrl("Category", new { SeName = item.SeName })" title="@item.PictureModel.Title">
+                                    <img alt="@item.PictureModel.AlternateText" src="@item.PictureModel.ImageUrl" title="@item.PictureModel.Title" />
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>*@
+}
+
+
+@*<h5 class="section-title">All Restaurant</h5>
+    <div class="single-product-wrap">
+        <div class="thumb">
+            <span class="tag">15% Off</span>
+            <a href="single-restuarent.html">
+                <img src="~/assets/img/product/01.png" alt="img">
+            </a>
+            <a class="fav-btn" href="#"><i class="fa fa-heart"></i></a>
+        </div>
+        <div class="details">
+            <h6><a href="single-restuarent.html">Pizza Hut</a> <span>Open</span></h6>
+            <div class="ratting">
+                <i class="ri-star-fill ps-0"></i>4.9
+                <span>(6k)</span>
+                <span>Birch Street El Paso</span>
+            </div>
+            <span>20-25 Min <span class="ms-3">Free Delivery</span></span>
+        </div>
+    </div>
+    <div class="single-product-wrap">
+        <div class="thumb">
+            <span class="tag">15% Off</span>
+            <a href="single-restuarent.html">
+                <img src="~/assets/img/product/02.png" alt="img">
+            </a>
+            <a class="fav-btn" href="#"><i class="fa fa-heart"></i></a>
+        </div>
+        <div class="details">
+            <h6><a href="single-restuarent.html">Mcdonald’s</a> <span>Open</span></h6>
+            <div class="ratting">
+                <i class="ri-star-fill ps-0"></i>4.9
+                <span>(6k)</span>
+                <span>Birch Street El Paso</span>
+            </div>
+            <span>20-25 Min <span class="ms-3">Free Delivery</span></span>
+        </div>
+    </div>
+    <div class="single-product-wrap">
+        <div class="thumb">
+            <span class="tag">15% Off</span>
+            <a href="single-restuarent.html">
+                <img src="~/assets/img/product/03.png" alt="img">
+            </a>
+            <a class="fav-btn" href="#"><i class="fa fa-heart"></i></a>
+        </div>
+        <div class="details">
+            <h6><a href="single-restuarent.html">Domino’s Pizza</a> <span>Open</span></h6>
+            <div class="ratting">
+                <i class="ri-star-fill ps-0"></i>4.9
+                <span>(6k)</span>
+                <span>Birch Street El Paso</span>
+            </div>
+            <span>20-25 Min <span class="ms-3">Free Delivery</span></span>
+        </div>
+    </div>
+    <div class="single-product-wrap">
+        <div class="thumb">
+            <span class="tag">15% Off</span>
+            <a href="single-restuarent.html">
+                <img src="~/assets/img/product/04.png" alt="img">
+            </a>
+            <a class="fav-btn" href="#"><i class="fa fa-heart"></i></a>
+        </div>
+        <div class="details">
+            <h6><a href="single-restuarent.html">Burger King</a> <span>Open</span></h6>
+            <div class="ratting">
+                <i class="ri-star-fill ps-0"></i>4.9
+                <span>(6k)</span>
+                <span>Birch Street El Paso</span>
+            </div>
+            <span>20-25 Min <span class="ms-3">Free Delivery</span></span>
+        </div>
+    </div>
+    <div class="single-product-wrap">
+        <div class="thumb">
+            <span class="tag">15% Off</span>
+            <a href="single-restuarent.html">
+                <img src="~/assets/img/product/05.png" alt="img">
+            </a>
+            <a class="fav-btn" href="#"><i class="fa fa-heart"></i></a>
+        </div>
+        <div class="details">
+            <h6><a href="single-restuarent.html">KFC</a> <span>Open</span></h6>
+            <div class="ratting">
+                <i class="ri-star-fill ps-0"></i>4.9
+                <span>(6k)</span>
+                <span>Birch Street El Paso</span>
+            </div>
+            <span>20-25 Min <span class="ms-3">Free Delivery</span></span>
+        </div>
+    </div>*@

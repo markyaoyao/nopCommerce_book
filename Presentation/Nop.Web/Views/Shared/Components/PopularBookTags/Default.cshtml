@@ -1,0 +1,70 @@
+﻿@model PopularProductTagsModel
+
+
+@if (Model.Tags.Count > 0)
+{
+    var count = 0;
+
+<div class="home-category-slider owl-carousel">
+    @foreach (var item in Model.Tags)
+    {
+        count++;
+
+        <div class="item">
+            <a class="home-category-item-wrap" href="single-page.html">
+                <img src="~/assets/img/category/ramen.png" alt="img">
+                @item.Name
+            </a>
+        </div>
+
+        if(count >= 8)
+        {
+            break;
+        }
+    }
+
+</div>
+
+}
+
+
+
+
+@*<div class="home-category-slider owl-carousel">
+    <div class="item">
+        <a class="home-category-item-wrap" href="single-page.html">
+            <img src="~/assets/img/category/ramen.png" alt="img">
+            Ramen
+        </a>
+    </div>
+    <div class="item">
+        <a class="home-category-item-wrap" href="single-page.html">
+            <img src="~/assets/img/category/pizza.png" alt="img">
+            Pizza
+        </a>
+    </div>
+    <div class="item">
+        <a class="home-category-item-wrap" href="single-page.html">
+            <img src="~/assets/img/category/burger.png" alt="img">
+            Burger
+        </a>
+    </div>
+    <div class="item">
+        <a class="home-category-item-wrap" href="single-page.html">
+            <img src="~/assets/img/category/drink.png" alt="img">
+            Soft Drinks
+        </a>
+    </div>
+    <div class="item">
+        <a class="home-category-item-wrap" href="single-page.html">
+            <img src="~/assets/img/category/fast-food.png" alt="img">
+            Fast Food
+        </a>
+    </div>
+    <div class="item">
+        <a class="home-category-item-wrap" href="single-page.html">
+            <img src="~/assets/img/category/french-fries.png" alt="img">
+            French Fries
+        </a>
+    </div>
+</div>*@

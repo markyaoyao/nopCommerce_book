@@ -1,0 +1,271 @@
+﻿@{
+    Layout = null;
+}
+
+<html lang="zh-Hant-TW">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
+    <style>
+        body {
+            background: #007bff;
+            background: linear-gradient(to right, #0062E6, #33AEFF);
+            font-family: arial,"Microsoft JhengHei","微軟正黑體",sans-serif !important;
+        }
+
+        .btn-login {
+            font-size: 0.9rem;
+            letter-spacing: 0.05rem;
+            padding: 0.75rem 1rem;
+        }
+
+
+    </style>
+    <title>登入綁定</title>
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
+                <div class="card border-0 shadow rounded-3 my-5">
+                    <div class="card-body p-4 p-sm-5">
+                        <h5 class="card-title text-center mb-5 fw-light fs-5">登 入 ..</h5>
+                        <form method="post">
+                            <div class="form-floating mb-3">
+                                <label for="floatingInput">Line UserId</label>
+                                <input type="email" class="form-control" id="LineUserId" placeholder="name@example.com" readonly>
+                            </div>
+                            <div class="form-floating mb-3">
+                                <label for="floatingInput">帳號</label>
+                                <input type="email" class="form-control" id="TaazeUserId" placeholder="name@example.com">
+                            </div>
+                            <div class="form-floating mb-3">
+                                <label for="floatingPassword">密碼</label>
+                                <input type="password" class="form-control" id="TaazePassword" placeholder="Password">
+                            </div>
+                            <div class="d-grid">
+                                <button class="btn btn-primary btn-login text-uppercase fw-bold" type="button" onclick="loginTaaze();">
+                                    Sign
+                                    in
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
+    <script charset="utf-8" src="https://static.line-scdn.net/liff/edge/2.1/sdk.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://malsup.github.io/jquery.blockUI.js"></script>
+    
+
+    <script type="text/javascript">
+        window.onload = function () {
+            const useNodeJS = false;   // if you are not using a node server, set this value to false
+            const defaultLiffId = "1594612944-m7Z8LN6A";   // change the default LIFF value if you are not using a node server
+
+            // DO NOT CHANGE THIS
+            let myLiffId = "";
+
+            // if node is used, fetch the environment variable and pass it to the LIFF method
+            // otherwise, pass defaultLiffId
+            if (useNodeJS) {
+                fetch('/send-id')
+                    .then(function (reqResponse) {
+                        return reqResponse.json();
+                    })
+                    .then(function (jsonResponse) {
+                        myLiffId = jsonResponse.id;
+                        initializeLiffOrDie(myLiffId);
+                    })
+                    .catch(function (error) {
+
+                    });
+            } else {
+                myLiffId = defaultLiffId;
+                initializeLiffOrDie(myLiffId);
+            }
+        };
+
+        /**
+        * Check if myLiffId is null. If null do not initiate liff.
+        * @@param {string} myLiffId The LIFF ID of the selected element
+        */
+        function initializeLiffOrDie(myLiffId) {
+            if (!myLiffId) {
+
+            } else {
+                initializeLiff(myLiffId);
+            }
+        }
+
+        /**
+        * Initialize LIFF
+        * @@param {string} myLiffId The LIFF ID of the selected element
+        */
+        function initializeLiff(myLiffId) {
+            liff
+                .init({
+                    liffId: myLiffId
+                })
+                .then(() => {
+                    // start to use LIFF's api
+                    initializeApp();
+                })
+                .catch((err) => {
+
+                });
+        }
+
+        /**
+         * Initialize the app by calling functions handling individual app components
+         */
+        function initializeApp() {
+
+            //ajax get notify status
+            liff.getProfile().then(function (profile) {
+
+                $("#LineUserId").val(profile.userId);
+
+                //var postData = { LineId: profile.userId };
+                //console.log(postData);
+                //$.ajax({
+                //    url: "/api/v1/checklink",
+                //    data: postData,
+                //    type: "POST",
+                //    dataType: "json",
+                //    success: function (returnData) {
+
+                //        //console.log(returnData);
+                //        //$("#custId").val(returnData.IsExist);
+                //        if (returnData.IsExist) {
+                //            location.href = "https://liff.line.me/1654571275-0ROQNyYr";
+                //        } else {
+                //            $("#GoAccountLink").show();
+                //        }
+
+                //    },
+                //    error: function (xhr, ajaxOptions, thrownError) {
+                //        console.log(xhr.status);
+                //        console.log(thrownError);
+                //    }
+                //});
+
+
+            }).catch(function (error) {
+                window.alert('Error getting profile: ' + error);
+            });
+
+
+        };
+
+        var loginTaaze = function () {
+
+            var postData = {
+                lineUserId: $("#LineUserId").val(),
+                taazeUserId: $("#TaazeUserId").val(),
+                taazePassword: $("#TaazePassword").val(),
+            };
+
+            console.log("postData", postData);
+
+            if (postData.lineUserId == "" || postData.taazeUserId == "" || postData.taazePassword == "") {
+
+                Swal.fire({
+                    title: '資料輸入錯誤',
+                    confirmButtonText: '確定',
+                }).then((result) => {
+                    /* Read more about isConfirmed, isDenied below */
+                    if (result.isConfirmed) {
+                        return false;
+                    }
+                })
+
+            } else {
+
+                $.blockUI({
+                    message: null
+                });
+
+                $.ajax({
+                    url: "@Html.Raw(Url.Action("AccountLinkGo", "Line"))",
+                    data: postData,
+                    type: "POST",
+                    dataType: "json",
+                    headers: {
+                        RequestVerificationToken:
+                            $('input:hidden[name="__RequestVerificationToken"]').val()
+                    },
+                    success: function (returnData) {
+                        //console.log(returnData);
+                        //if (returnData.success) {
+                        //    if (!liff.isInClient()) {
+                        //    } else {
+                        //        liff.closeWindow();
+                        //    }
+                        //} else {
+                        //    if (!liff.isInClient()) {
+                        //    } else {
+                        //        liff.closeWindow();
+                        //    }
+                        //}
+
+                        var resultText = "綁定失敗";
+                        if (returnData.success) resultText = "綁定成功";
+
+                        if (!liff.isInClient())
+                        {
+                            Swal.fire({
+                                title: resultText,
+                                confirmButtonText: '確定',
+                            })
+                        }
+                        else
+                        {
+                            Swal.fire({
+                                title: resultText,
+                                confirmButtonText: '確定',
+                            }).then((result) => {
+                                /* Read more about isConfirmed, isDenied below */
+                                if (result.isConfirmed) {
+                                    liff.closeWindow();
+                                }
+                            })
+
+                            //liff.closeWindow();
+                        }
+
+                        
+
+                    },
+                    error: function (xhr, ajaxOptions, thrownError) {
+                        console.log(xhr.status);
+                        console.log(thrownError);
+                    },
+                    complete: function () {
+                        $.unblockUI();
+                    }
+                });
+            }
+
+
+
+        };
+
+
+
+    </script>
+
+</body>
+</html>

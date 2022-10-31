@@ -1,0 +1,48 @@
+﻿@model Nop.Web.Models.Plugins.NivoSliderPublicInfoModel
+@{
+
+}
+
+<div class="banner-slider-wrap">
+    <div class="banner-slider owl-carousel">
+        @if (!string.IsNullOrEmpty(Model.Picture1Url))
+        {
+            <div class="item">
+                <img src="@Model.Picture1Url" alt="img" style="width:267px;">
+            </div>
+        }
+        @if (!string.IsNullOrEmpty(Model.Picture2Url))
+        {
+            <div class="item">
+                <img src="@Model.Picture2Url" alt="img" style="width:267px;">
+            </div>
+        }
+        @if (!string.IsNullOrEmpty(Model.Picture3Url))
+        {
+            <div class="item">
+                <img src="@Model.Picture3Url" alt="img" style="width:267px;">
+            </div>
+        }
+        @if (!string.IsNullOrEmpty(Model.Picture4Url))
+        {
+            <div class="item">
+                <img src="@Model.Picture4Url" alt="img" style="width:267px;">
+            </div>
+        }
+        @if (!string.IsNullOrEmpty(Model.Picture5Url))
+        {
+            <div class="item">
+                <img src="@Model.Picture5Url" alt="img" style="width:267px;">
+            </div>
+        }
+        @*<div class="item">
+            <img src="~/assets/img/banner/1.png" alt="img">
+        </div>
+        <div class="item">
+            <img src="~/assets/img/banner/2.png" alt="img">
+        </div>
+        <div class="item">
+            <img src="~/assets/img/banner/3.png" alt="img">
+        </div>*@
+    </div>
+</div>

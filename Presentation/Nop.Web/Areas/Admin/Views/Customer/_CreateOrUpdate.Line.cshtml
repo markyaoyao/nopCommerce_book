@@ -1,0 +1,185 @@
+﻿@model CustomerModel
+
+@using Newtonsoft.Json
+@if (Model.CountryEnabled && Model.StateProvinceEnabled)
+{
+    <script>
+        $(document).ready(function() {
+            $("#@Html.IdFor(model => model.CountryId)").change(function() {
+                var selectedItem = $(this).val();
+                var ddlStates = $("#@Html.IdFor(model => model.StateProvinceId)");
+
+                var postData = {
+                    countryId: selectedItem,
+                    addSelectStateItem: "true"
+                };
+
+                $.ajax({
+                    cache: false,
+                    type: "GET",
+                    url: "@(Url.Action("GetStatesByCountryId", "Country"))",
+                    data: postData,
+                    success: function (data, textStatus, jqXHR) {
+                        ddlStates.html('');
+                        $.each(data, function(id, option) {
+                            ddlStates.append($('<option></option>').val(option.id).html(option.name));
+                        });
+                    },
+                    error: function (jqXHR, textStatus, errorThrown) {
+                        $("#statesAlert").click();
+                    }
+                });
+            });
+        });
+    </script>
+}
+
+<script>
+        $(document).ready(function() {
+
+        });
+
+    var LineSendTextMessage = function (e) {
+        var elm = $(e);
+        var message = $("#LineText").val();
+        if (message.length > 0) {
+
+            $.ajax({
+                cache: false,
+                type: "POST",
+                url: "@(Url.Action("LineSendTextMessage", "Customer"))",
+                data: addAntiForgeryToken({ customerId: elm.data('cid'), pushMessage: message }),
+                dataType: "json",
+                success: function (data, textStatus, jqXHR) {
+
+                    alert(data.retMsg);
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    $("#statesAlert").click();
+                }
+            });
+        } else {
+            alert("請輸入要發送的訊息");
+        }
+
+    };
+
+    var LineSendTemplateMessage = function (e) {
+
+        var elm = $(e);
+
+         $.ajax({
+                cache: false,
+                type: "POST",
+                url: "@(Url.Action("LineSendTepmlateMessage", "Customer"))",
+                data: addAntiForgeryToken({ customerId: elm.data('cid') }),
+                dataType: "json",
+                success: function (data, textStatus, jqXHR) {
+                    alert(data.retMsg);
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    $("#statesAlert").click();
+                }
+            });
+
+    };
+    var LineSendTop5TepmlateMessage = function (e) {
+
+        var elm = $(e);
+
+         $.ajax({
+                cache: false,
+                type: "POST",
+                url: "@(Url.Action("LineSendTop5TepmlateMessage", "Customer"))",
+                data: addAntiForgeryToken({ customerId: elm.data('cid') }),
+                dataType: "json",
+                success: function (data, textStatus, jqXHR) {
+                    alert(data.retMsg);
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    $("#statesAlert").click();
+                }
+            });
+
+    };
+    var LineSendImagemapMessage = function (e) {
+
+        var elm = $(e);
+
+         $.ajax({
+                cache: false,
+                type: "POST",
+                url: "@(Url.Action("LineSendImagemapMessage", "Customer"))",
+                data: addAntiForgeryToken({ customerId: elm.data('cid') }),
+                dataType: "json",
+                success: function (data, textStatus, jqXHR) {
+                    alert(data.retMsg);
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    $("#statesAlert").click();
+                }
+            });
+
+    };
+</script>
+
+<div class="panel-body">
+
+    <div class="form-group">
+        <div class="col-md-3">
+            <div class="label-wrapper">
+                <label class="control-label" for="LineText">文字訊息</label>
+                <div title="文字訊息" data-toggle="tooltip" class="ico-help">
+                    <i class="fa fa-question-circle"></i>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <input class="form-control" type="text" placeholder="" id="LineText">
+        </div>
+        <div class="col-md-6">
+            <button type="button" class="btn btn-primary" onclick="LineSendTextMessage(this);" data-cid="@Model.Id">測試發送文字訊息</button>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-md-3">
+            <div class="label-wrapper">
+                <label class="control-label" for="LineText">推薦5本書</label>
+                <div title="推薦5本書" data-toggle="tooltip" class="ico-help">
+                    <i class="fa fa-question-circle"></i>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-9">
+            <button type="button" class="btn btn-primary" onclick="LineSendTop5TepmlateMessage(this);" data-cid="@Model.Id">測試發送推薦5本書</button>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-md-3">
+            <div class="label-wrapper">
+                <label class="control-label" for="LineText">贈送折價劵</label>
+                <div title="贈送折價劵" data-toggle="tooltip" class="ico-help">
+                    <i class="fa fa-question-circle"></i>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-9">
+            <button type="button" class="btn btn-primary" onclick="LineSendTemplateMessage(this);" data-cid="@Model.Id">測試發送贈送折價劵</button>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-md-3">
+            <div class="label-wrapper">
+                <label class="control-label" for="LineText">發送DM</label>
+                <div title="發送DM" data-toggle="tooltip" class="ico-help">
+                    <i class="fa fa-question-circle"></i>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-9">
+            <button type="button" class="btn btn-primary" onclick="LineSendImagemapMessage(this);" data-cid="@Model.Id">測試發送發送DM</button>
+        </div>
+    </div>
+</div>
+
+<nop-alert asp-alert-id="statesAlert" asp-alert-message="@T("Admin.Common.Alert.States.Failed")" />

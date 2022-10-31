@@ -1,0 +1,143 @@
+﻿
+@{
+    //current category ID
+    var isHomepage = Url.ActionContext.RouteData.Values["controller"].ToString().Equals("home", StringComparison.InvariantCultureIgnoreCase) &&
+        Url.ActionContext.RouteData.Values["action"].ToString().Equals("bookindex", StringComparison.InvariantCultureIgnoreCase);
+
+}
+
+@await Component.InvokeAsync("Widget", new { widgetZone = PublicWidgetZones.HeaderBefore })
+<div class="container">
+    <div class="main-home-area pb-0 mt-5">
+        <div class="location-area">
+            <div class="media">
+                @*<img src="~/assets/img/icon/map-marker.svg" alt="img">*@
+                <i class="fa fa-bars" onclick="CategoryModal();"></i>
+                <div class="media-body" style="margin-left:25px;">
+                    <span>Delivery to</span>
+                    <select class="single-select">
+                        <option>San Francisco, US</option>
+                        <option value="asc">Dhaka, Bangladesh</option>
+                    </select>
+                </div>
+            </div>
+            <a class="notification-btn" href="#"><img src="~/assets/img/icon/notification.svg" alt="icon"></a>
+        </div>
+        <div class="home-search-wrap">
+            <div class="default-form-wrap">
+                <div class="single-input-wrap">
+                    <label><img src="~/assets/img/icon/search.svg" alt="img"></label>
+                    <input type="text" class="form-control" placeholder="Search for food">
+                </div>
+                <button type="button" class="btn btn-border" data-bs-toggle="modal" data-bs-target="#exampleModa1">
+                    <img src="~/assets/img/icon/filter.svg" alt="img">
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@*首頁Banner*@
+@if (isHomepage)
+{
+    @await Component.InvokeAsync("HomepageBanner")
+
+}
+
+<!-- Modal -->
+<div class="modal fade bottom filter-modal-popup" id="exampleModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="container">
+                <h5 class="section-title">Shot by</h5>
+                <div class="home-category-slider owl-carousel">
+                    <div class="item">
+                        <button class="home-category-item-wrap">
+                            Offer
+                        </button>
+                    </div>
+                    <div class="item">
+                        <button class="home-category-item-wrap">
+                            Free Delivery
+                        </button>
+                    </div>
+                    <div class="item">
+                        <button class="home-category-item-wrap">
+                            Most Popular
+                        </button>
+                    </div>
+                    <div class="item">
+                        <button class="home-category-item-wrap">
+                            Online Payment
+                        </button>
+                    </div>
+                </div>
+                <h5 class="section-title">Category</h5>
+                <div class="home-category-slider owl-carousel">
+                    <div class="item">
+                        <a class="home-category-item-wrap" href="#">
+                            <img src="~/assets/img/category/ramen.png" alt="img">
+                            Ramen
+                        </a>
+                    </div>
+                    <div class="item">
+                        <a class="home-category-item-wrap" href="#">
+                            <img src="~/assets/img/category/pizza.png" alt="img">
+                            Pizza
+                        </a>
+                    </div>
+                    <div class="item">
+                        <a class="home-category-item-wrap" href="#">
+                            <img src="~/assets/img/category/burger.png" alt="img">
+                            Burger
+                        </a>
+                    </div>
+                    <div class="item">
+                        <a class="home-category-item-wrap" href="#">
+                            <img src="~/assets/img/category/drink.png" alt="img">
+                            Soft Drinks
+                        </a>
+                    </div>
+                    <div class="item">
+                        <a class="home-category-item-wrap" href="#">
+                            <img src="~/assets/img/category/fast-food.png" alt="img">
+                            Fast Food
+                        </a>
+                    </div>
+                    <div class="item">
+                        <a class="home-category-item-wrap" href="#">
+                            <img src="~/assets/img/category/french-fries.png" alt="img">
+                            French Fries
+                        </a>
+                    </div>
+                </div>
+                <h5 class="section-title">Price Range</h5>
+                <ul class="price-list">
+                    <li><a href="#">$</a></li>
+                    <li><a href="#">$$</a></li>
+                    <li><a href="#">$$$</a></li>
+                    <li><a href="#">$$$$</a></li>
+                </ul>
+                <button type="button" class="link-btn" data-bs-dismiss="modal">Clear All</button>
+                <button type="button" class="btn btn-base">Apply Filters</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade bottom filter-modal-popup" id="exampleModa2" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">所有館別</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="container">
+
+            </div>
+        </div>
+    </div>
+</div>
+
+@await Component.InvokeAsync("Widget", new { widgetZone = PublicWidgetZones.HeaderAfter })
